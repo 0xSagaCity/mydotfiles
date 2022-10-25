@@ -14,13 +14,13 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 
 naughty.config.defaults = {
-    timeout = 5,
-    text = "",
-    screen = 1,
-    ontop = true,
-    margin = "5",
-    border_width = "1",
-    position = "top_right"
+	timeout = 5,
+	text = "",
+	screen = 1,
+	ontop = true,
+	margin = "5",
+	border_width = "1",
+	position = "top_right",
 }
 
 -- Error handling
@@ -31,7 +31,7 @@ if awesome.startup_errors then
 		preset = naughty.config.presets.critical,
 		title = "Oops, there were errors during startup!",
 		text = awesome.startup_errors,
-		position = "top_right"
+		position = "top_right",
 	})
 end
 
@@ -39,21 +39,20 @@ end
 do
 	local in_error = false
 	awesome.connect_signal("debug::error", function(err)
-			-- Make sure we don't go into an endless error loop
-			if in_error then
-				return
-			end
-			in_error = true
-
-			naughty.notify({
-				preset = naughty.config.presets.critical,
-				title = "Oops, an error happened!",
-				text = tostring(err),
-				position = "top_right"
-			})
-			in_error = false
+		-- Make sure we don't go into an endless error loop
+		if in_error then
+			return
 		end
-	)
+		in_error = true
+
+		naughty.notify({
+			preset = naughty.config.presets.critical,
+			title = "Oops, an error happened!",
+			text = tostring(err),
+			position = "top_right",
+		})
+		in_error = false
+	end)
 end
 
 -- Autostart windowless processes
@@ -79,46 +78,39 @@ awful.layout.layouts = {
 
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
-
 -- Screen
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", function(s)
-		gears.wallpaper.maximized(beautiful.wallpapers[s.index], s, true)
-	end
-)
+	gears.wallpaper.maximized(beautiful.wallpapers[s.index], s, true)
+end)
 
 local generate_wibar = require("bar")
 awful.screen.connect_for_each_screen(function(s)
-		-- gears.wallpaper.maximized(beautiful.wallpapers[s.index], s, true)
-		gears.wallpaper.centered(beautiful.wallpapers[s.index], s, "#0D1015", 0.5)
-			-- Tags
-		awful.tag(tagnames, s, awful.layout.layouts[1])
-		generate_wibar(s)
-	end
-)
+	-- gears.wallpaper.maximized(beautiful.wallpapers[s.index], s, true)
+	gears.wallpaper.centered(beautiful.wallpapers[s.index], s, "#0D1015", 0.5)
+	-- Tags
+	awful.tag(tagnames, s, awful.layout.layouts[1])
+	generate_wibar(s)
+end)
 
 -- Set keys
 local keybinds = require("keybinds")
 
 clientbuttons = gears.table.join(
 	awful.button({}, 1, function(c)
-			c:emit_signal("request::activate", "mouse_click", {raise = true})
-		end
-	),
-	awful.button({modkey}, 1, function(c)
-			c:emit_signal("request::activate", "mouse_click", {raise = true})
-			awful.mouse.client.move(c)
-		end
-	),
-	awful.button({modkey}, 3, function(c)
-			c:emit_signal("request::activate", "mouse_click", {raise = true})
-			awful.mouse.client.resize(c)
-		end
-	),
-	awful.button({modkey}, 2, function(c)
-			c:kill()
-		end
-	)
+		c:emit_signal("request::activate", "mouse_click", { raise = true })
+	end),
+	awful.button({ modkey }, 1, function(c)
+		c:emit_signal("request::activate", "mouse_click", { raise = true })
+		awful.mouse.client.move(c)
+	end),
+	awful.button({ modkey }, 3, function(c)
+		c:emit_signal("request::activate", "mouse_click", { raise = true })
+		awful.mouse.client.resize(c)
+	end),
+	awful.button({ modkey }, 2, function(c)
+		c:kill()
+	end)
 )
 
 root.keys(keybinds.globalkeys)
@@ -136,15 +128,15 @@ awful.rules.rules = {
 			keys = keybinds.clientkeys,
 			buttons = clientbuttons,
 			screen = awful.screen.preferred,
-			placement = awful.placement.no_overlap + awful.placement.no_offscreen
-		}
+			placement = awful.placement.no_overlap + awful.placement.no_offscreen,
+		},
 	},
 	-- Floating clients.
 	{
 		rule_any = {
 			instance = {
 				-- "pinentry",
-				"nmtui",				-- set when launched from wifi widget
+				"nmtui", -- set when launched from wifi widget
 			},
 			class = {
 				"Pavucontrol",
@@ -155,55 +147,58 @@ awful.rules.rules = {
 			-- Note that the name property shown in xprop might be set slightly after creation of the client
 			-- and the name shown there might not match defined rules here.
 			name = {
-				"Event Tester" -- xev.
+				"Event Tester", -- xev.
 			},
 			role = {
-				"pop-up" -- e.g. Google Chrome's (detached) Developer Tools.
-			}
+				"pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
+			},
 		},
-		properties = {floating = true, placement = awful.placement.centered, ontop = true}
+		properties = { floating = true, placement = awful.placement.centered, ontop = true },
 	},
 
 	--Set music stuff to always map on the tag named "five" on screen 1.
 	{
 		rule_any = {
 			instance = { "mpv-ytm" },
-			class = { "Spotify" }
+			class = { "Spotify" },
 		},
-		properties = { screen = 1, tag = "five"}
+		properties = { screen = 1, tag = "five" },
 	},
 
 	--Stuff that needs to launch in the second monitor
 }
-
 -- Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function(c)
-		-- Set new windows at the slave
-		if not awesome.startup then awful.client.setslave(c) end
-
-		if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
-			-- Prevent clients from being unreachable after screen count changes.
-			awful.placement.no_offscreen(c)
-		end
-
-		-- Windows like spotify only set class name after window opens.
-		-- So add a listener for when it attains classname and then apply rules
-		if c.name == nil and c.class == nil then
-			c.minimized = true
-			c:connect_signal("property::class", function ()
-					c.minimized = false
-					awful.rules.apply(c)
-				end
-			)
-		end
-
-		c.shape = gears.shape.rounded_rect
+	-- Set new windows at the slave
+	if not awesome.startup then
+		awful.client.setslave(c)
 	end
-)
+
+	if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
+		-- Prevent clients from being unreachable after screen count changes.
+		awful.placement.no_offscreen(c)
+	end
+
+	-- Windows like spotify only set class name after window opens.
+	-- So add a listener for when it attains classname and then apply rules
+	if c.name == nil and c.class == nil then
+		c.minimized = true
+		c:connect_signal("property::class", function()
+			c.minimized = false
+			awful.rules.apply(c)
+		end)
+	end
+
+	c.shape = gears.shape.rounded_rect
+end)
 
 awful.spawn("xset r rate 220 40")
 awful.spawn("picom --blur-method dual_kawase --blur-strength 7")
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color= beautiful.border_normal end)
+client.connect_signal("focus", function(c)
+	c.border_color = beautiful.border_focus
+end)
+client.connect_signal("unfocus", function(c)
+	c.border_color = beautiful.border_normal
+end)
