@@ -210,13 +210,13 @@ local function factory(args)
                     bat.id = naughty.notify({
                         preset = bat_notification_critical_preset,
                         replaces_id = bat.id,
-						position = "bottom_right"
+						position = "top_right"
                     }).id
                 elseif tonumber(bat_now.perc) <= n_perc[2] then
                     bat.id = naughty.notify({
                         preset = bat_notification_low_preset,
                         replaces_id = bat.id,
-						position = "bottom_right"
+						position = "top_right"
                     }).id
                 end
                 fullnotification = false
@@ -224,7 +224,7 @@ local function factory(args)
                 bat.id = naughty.notify({
                     preset = bat_notification_charged_preset,
                     replaces_id = bat.id,
-					position = "bottom_right"
+					position = "top_right"
                 }).id
                 fullnotification = true
             end

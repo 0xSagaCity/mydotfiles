@@ -73,7 +73,7 @@ local globalkeys = gears.table.join(
 		{ description = "quit awesome", group = "awesome" }
 	),
 	awful.key({modkey}, "l",
-                function() awful.spawn("dm-tool switch-to-greeter") end,
+                function() awful.spawn("betterlockscreen --lock") end,
 		{ description = "lock screen", group = "lock" }
 	),
 	awful.key({modkey}, "h",
@@ -168,7 +168,7 @@ local globalkeys = gears.table.join(
 		{ description = "launch whatsapp", group = "apps" }
 	),
 	awful.key({modkey}, "Print",
-		function() awful.spawn("flameshot screen -c", false) end,
+		function() awful.spawn("flameshot full -c", false) end,
 		{ description = "screenshot to clipboard", group = "apps" }
 	),
 	awful.key({modkey, "Control"}, "Print",
@@ -228,7 +228,7 @@ local clientkeys = gears.table.join(
 		end,
 		{ description = "toggle fullscreen", group = "client" }
 	),
-	awful.key({modkey}, "q",
+	awful.key({modkey}, "End",
 		function(c) c:kill() end,
 		{ description = "close", group = "client" }
 	),

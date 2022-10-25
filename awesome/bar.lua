@@ -12,7 +12,7 @@ local brightness_widget = require("widgets.brightness")
 local cal_task = require("widgets.cal_task")
 
 
-local menu_bg = function (cr, w, h) gears.shape.rounded_rect(cr, w, h, 10) end
+local menu_bg = function (cr, w, h) gears.shape.rounded_rect(cr, w, h, 8) end
 -- [[[ Main Menu
 local mymainmenu = awful.menu({
   items = {
@@ -29,7 +29,7 @@ local mymainmenu = awful.menu({
 mymainmenu.wibox.shape = menu_bg
 
 local menulauncher = wibox.widget.imagebox(beautiful.menu_launcher);
-menulauncher:connect_signal("button::press", function(_, _, _, button) mymainmenu:show({coords = {x = 0, y = 32}}) end)
+menulauncher:connect_signal("button::press", function(_, _, _, button) mymainmenu:show({coords = {x = 20, y = 870}}) end)
 
 -- Hide the menu when the mouse leaves it
 local mouse_in_main = false
@@ -102,7 +102,7 @@ awful.button({}, 1, function(c)	c.minimized = false end)
 -- [[[ Widgets
 
 -- Textclock
-local mytextclock = wibox.widget.textclock(markup("#fe8019", "%a %d %b") .. markup("#cc241d", "::") .. markup("#83a598", "%I:%M %p"));
+local mytextclock = wibox.widget.textclock(markup("#ff9e64", "%a %d %b") .. markup("#cc241d", "::") .. markup("#83a598", "%I:%M %p"));
 -- mytextclock.font = beautiful.font
 local clock_widget = wibox.widget {
   widget = wibox.layout.fixed.horizontal,
@@ -201,10 +201,10 @@ function generate_wibar(s)
         image = beautiful.minimise_def_icon			-- default icon for apps without icon
       },
       widget = wibox.container.background,
-      bg = "#1d2021",
+      bg = "#1f2335",
       shape = gears.shape.circle,
       shape_border_width = 5,
-      shape_border_color = "#00000000"
+      shape_border_color = "#000000"
     }
   }
 
@@ -215,7 +215,7 @@ function generate_wibar(s)
   my_middle_widget.fill_horizontal = true
   my_middle_widget:connect_signal("button::press", on_middlebar_mouse_button);
 
-  s.mywibar = awful.wibar({ position = "bottom", screen = s, bg = beautiful.bg_wibar, fg = beautiful.fg_normal, width = 1920, height = 20 })
+  s.mywibar = awful.wibar({ position = "top", screen = s, bg = beautiful.bg_wibar, fg = beautiful.fg_normal, width = 1920, height = 22 })
 
   s.mywibar:setup {
     layout = wibox.layout.align.horizontal,
@@ -224,13 +224,7 @@ function generate_wibar(s)
     menulauncher,
     s.mytaglist,
     s.mylayoutbox,
-    {
-      widget = wibox.widget.separator,
-      span_ratio = 0.7,
-      color = beautiful.fg_normal,
-      orientation = 'vertical',
-      forced_width= 2
-    },
+  my_media_widget,
   },
   my_middle_widget,
   {	-- Right widgets
@@ -241,7 +235,6 @@ function generate_wibar(s)
     span_ratio = 0.7,
     color = beautiful.fg_normal,
   },
-  my_media_widget,
   my_volume_widget,
   s.index == 1 and memory_widget or nil,
   s.index == 1 and cpu_widget or nil,

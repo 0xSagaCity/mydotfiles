@@ -6,34 +6,88 @@ local awful = require("awful");
 local wibox = require("wibox");
 local watch = require("awful.widget.watch");
 
+local HOME_DIR = os.getenv("HOME")
+local WIDGET_DIR = HOME_DIR .. '/.config/awesome/widgets/'
+local ICONS_DIR = WIDGET_DIR .. 'icons/'
 local NET_SIGNAL_CMD = "bash -c \"nmcli -t -f IN-USE,SIGNAL device wifi | grep \'*\'\""
 local NET_STATUS_CMD = "nmcli network connectivity"
-local NET_SPEED_CMD = "/usr/local/bin/downloadSpeed.sh"
 local NET_INFO_CMD = "nmcli -t -f general.connection,ip4.address device show wlp6s0"
 
 local wifi_widget = {}
 
-local worker = function(user_args)
+local function convert_to_h(bytes)
+    local speed
+    local dim
+    local bits = bytes * 8
+    if bits < 1000 then
+        speed = bits
+        dim = 'b/s'
+    elseif bits < 1000000 then
+        speed = bits/1000
+        dim = 'KB/s'
+    elseif bits < 1000000000 then
+        speed = bits/1000000
+        dim = 'Mb/s'
+    elseif bits < 1000000000000 then
+        speed = bits/1000000000
+        dim = 'Gb/s'
+    else
+        speed = tonumber(bits)
+        dim = 'b/s'
+    end
+    return math.floor(speed + 0.5) .. dim
+end
 
+local function split(string_to_split, separator)
+    if separator == nil then separator = "%s" end
+    local t = {}
+
+    for str in string.gmatch(string_to_split, "([^".. separator .."]+)") do
+        table.insert(t, str)
+    end
+
+    return t
+end
+
+
+local function worker(user_args)
+    local args = user_args or {}
+    local interface = args.interface or '*'
+    local timeout = args.timeout or 1
+    local width = args.width or 55
 	local icons = user_args.icons;
-	local font = user_args.font or "JetBrains Mono Medium 9";
-	local timeout = 2;
-	local speed_timeout = 4;
-	local gap = user_args.space;
-	
-	wifi_widget = wibox.widget{
-		layout = wibox.layout.fixed.horizontal,
-		spacing = gap,
+    net_speed_widget = wibox.widget {
 		{
 			id = 'icon',
 			widget = wibox.widget.imagebox,
-			image = icons[2],
+			image = icons[4],
 		},
-		{
-			id = 'text',
-			widget = wibox.widget.textbox,
-		},
-
+        {
+            id = 'rx_speed',
+            forced_width = width,
+            align = 'right',
+            widget = wibox.widget.textbox
+        },
+        {
+			id = 'icon',
+            image = ICONS_DIR .. 'down.svg',
+            widget = wibox.widget.imagebox
+        },
+        {
+			id = 'icon',
+            image =  ICONS_DIR .. 'up.svg',
+            widget = wibox.widget.imagebox
+        },
+        {
+            id = 'tx_speed',
+            forced_width = width,
+            align = 'left',
+            widget = wibox.widget.textbox
+        },
+        layout = wibox.layout.fixed.horizontal,
+        set_rx_text = function(self, new_rx_speed)
+            self:get_children_by_id('rx_speed')[1]:set_text(tostring(new_rx_speed))
+        end,
 		update_strength = function(self, strength)
 			local strength_icon = icons[math.ceil(strength/25) + 1]
 			if self.icon.image ~= strength_icon then
@@ -44,48 +98,31 @@ local worker = function(user_args)
 			self:set_opacity(is_connected and 1 or 0.5)
 			self:emit_signal('widget::redraw_needed')
 		end,
-		update_speed = function(self, down_speed)
-			self.text:set_markup(string.format("<span font='%s' foreground='%s'>%s</span>", font, "#98971a", down_speed));
-		end
-	}
+        set_tx_text = function(self, new_tx_speed)
+            self:get_children_by_id('tx_speed')[1]:set_text(tostring(new_tx_speed))
+        end
+    }
 
-	local update_widget = function(widget, stdout, stderr, _, _)
-		local strength_string = string.match(stdout, ":(%d*)");
-		widget:update_strength(tonumber(strength_string) or 0);
-	end;
-
-	local is_connected = nil
-	local update_conn = function(widget, stdout, stderr, _, _)
-		local is_connected_now = stdout:find("limited") == nil
-		if is_connected ~= is_connected_now then
-			is_connected = is_connected_now
-			widget:update_net(is_connected)
-		end
-	end
-
-	local update_speed = function(widget, stdout)
-		local speed;
-		local K_pos = stdout:find("K")
-		if K_pos then
-			local data = tonumber(stdout:sub(1, K_pos-1))
-			if data == nil then return end
-			speed = string.format("%.1f MB/s", data/(1024 * speed_timeout))
-		else
-			local data = tonumber(stdout)
-			if data == nil then return end
-			speed = string.format("%.1f KB/s", data/(1024 * speed_timeout))
-		end
-		widget:update_speed(speed)
-	end
-
-	watch(NET_SIGNAL_CMD, timeout, update_widget, wifi_widget);
-	watch(NET_STATUS_CMD, timeout, update_conn, wifi_widget);
-	watch(NET_SPEED_CMD, speed_timeout, update_speed, wifi_widget);
-
-	--- Adds mouse controls to the widget:
-	--  - left click - nmtui
-	--  - right click - refresh status
-	wifi_widget:connect_signal("button::press", function(_, _, _, button)
+    -- make sure these are not shared across different worker/widgets (e.g. two monitors)
+    -- otherwise the speed will be randomly split among the worker in each monitor
+    local prev_rx = 0
+    local prev_tx = 0
+    local update_widget = function(widget, stdout)
+        local cur_vals = split(stdout, '\r\n')
+        local cur_rx = 0
+        local cur_tx = 0
+        for i, v in ipairs(cur_vals) do
+            if i%2 == 1 then cur_rx = cur_rx + v end
+            if i%2 == 0 then cur_tx = cur_tx + v end
+        end
+        local speed_rx = (cur_rx - prev_rx) / timeout
+        local speed_tx = (cur_tx - prev_tx) / timeout
+        widget:set_rx_text(convert_to_h(speed_rx))
+        widget:set_tx_text(convert_to_h(speed_tx))
+        prev_rx = cur_rx
+        prev_tx = cur_tx
+    end
+	net_speed_widget:connect_signal("button::press", function(_, _, _, button)
 			if button == 1 then
 				local nmtui_window = function(c) return awful.rules.match(c, {instance = "nmtui"}) end;
 				for c in awful.client.iterate(nmtui_window) do
@@ -99,27 +136,11 @@ local worker = function(user_args)
 		end
 	);
 
-	local last_result = ""
-	local info_tooltip;
-	info_tooltip = awful.tooltip{
-		objects = {wifi_widget},
-		timer_function = function()
-			 awful.spawn.easy_async_with_shell(NET_INFO_CMD, function(result)
-					local formatted = result:gsub("GENERAL.CONNECTION:", "ssid: "):gsub("IP4.ADDRESS....", "ip  : ")
-					last_result = formatted
-					info_tooltip:set_markup(last_result)
-				end)
-			return last_result
-		end,
-		delay_show = 1,
-		fg = "#fe8019",
-		bg = "#1d2021",
-		border_width = 1,
-		border_color = "#282828",
-	}
+    watch(string.format([[bash -c "cat /sys/class/net/%s/statistics/*_bytes"]], interface),
+        timeout, update_widget, net_speed_widget)
 
-	return wifi_widget;
-end;
+    return net_speed_widget
+end
 
 return setmetatable(wifi_widget, {	__call = function(_, ...)
 		return worker(...);

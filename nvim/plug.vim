@@ -51,6 +51,5 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'norcalli/nvim-colorizer.lua'
 
 Plug 'olimorris/onedarkpro.nvim'
-Plug 'rafamadriz/themes.nvim'
 
 call plug#end()

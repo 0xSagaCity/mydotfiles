@@ -28,7 +28,7 @@ function task.show()
 			timeout = 0,
 			max_height = 714,
 			max_width = 1280,
-			position = "bottom_right"
+			position = "top_right"
 		}
 	end
 	)
@@ -105,7 +105,7 @@ function cal.show(month, year, scr)
 		icon    = cal.icon,
 		timeout = 0,
 		text    = text,
-		position = "bottom_right"
+		position = "top_right"
 	}
 end
 

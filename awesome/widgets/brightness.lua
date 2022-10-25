@@ -35,7 +35,7 @@ local worker = function(user_args)
 
 		update_brightness = function(self, brightness)
 			
-			local brightness_markup = string.format("<span font='%s' foreground='%s'>%s%%</span>", font, "#b16286", brightness);
+			local brightness_markup = string.format("<span font='%s' foreground='%s'>%s%%</span>", font, "#FF6188", brightness);
 
 			if self.brightness:get_markup() ~= brightness_markup then
 				self.brightness:set_markup(brightness_markup);

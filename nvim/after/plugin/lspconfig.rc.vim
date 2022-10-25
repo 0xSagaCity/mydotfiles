@@ -123,6 +123,7 @@ nvim_lsp.tsserver.setup {
 
 nvim_lsp.eslint.setup {
 	capabilities = capabilities,
+  root_dir = nvim_lsp.util.root_pattern("package.json"),
 	on_attach = function(client, bufnr)
 		-- make sure to only do this for servers that you intend, in this example "eslint"
 		client.server_capabilities.document_formatting = true

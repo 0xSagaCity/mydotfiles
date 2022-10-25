@@ -20,7 +20,7 @@ naughty.config.defaults = {
     ontop = true,
     margin = "5",
     border_width = "1",
-    position = "bottom_right"
+    position = "top_right"
 }
 
 -- Error handling
@@ -31,7 +31,7 @@ if awesome.startup_errors then
 		preset = naughty.config.presets.critical,
 		title = "Oops, there were errors during startup!",
 		text = awesome.startup_errors,
-		position = "bottom_right"
+		position = "top_right"
 	})
 end
 
@@ -49,7 +49,7 @@ do
 				preset = naughty.config.presets.critical,
 				title = "Oops, an error happened!",
 				text = tostring(err),
-				position = "bottom_right"
+				position = "top_right"
 			})
 			in_error = false
 		end
@@ -62,20 +62,19 @@ local function run_once(cmd_arr)
 		awful.spawn.with_shell(string.format("pgrep -u $USER -fx '%s' > /dev/null || (%s)", cmd, cmd))
 	end
 end
-run_once({"picom", "greenclip daemon", "playerctld daemon", "powerkit"})
-
+awful.util.spawn("playerctld daemon")
 
 terminal = "kitty"
 editor = "nvim"
 modkey = "Mod4" -- Super Key
 browser = "brave"
-tagnames = { " [म]", "[द]", "[फ]", "[क] " }
+tagnames = { " [म]", "[द]", "[र]", "[फ]", "[क]", "[र] " }
 awful.layout.layouts = {
 	awful.layout.suit.tile,
---	awful.layout.suit.tile.bottom,
---	-- awful.layout.suit.magnifier,
---	-- awful.layout.suit.spiral.dwindle,
---	awful.layout.suit.max,
+	awful.layout.suit.tile.bottom,
+	awful.layout.suit.magnifier,
+	awful.layout.suit.spiral.dwindle,
+	awful.layout.suit.max,
 }
 
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
@@ -90,7 +89,8 @@ screen.connect_signal("property::geometry", function(s)
 
 local generate_wibar = require("bar")
 awful.screen.connect_for_each_screen(function(s)
-		gears.wallpaper.maximized(beautiful.wallpapers[s.index], s, true)
+		-- gears.wallpaper.maximized(beautiful.wallpapers[s.index], s, true)
+		gears.wallpaper.centered(beautiful.wallpapers[s.index], s, "#0D1015", 0.5)
 			-- Tags
 		awful.tag(tagnames, s, awful.layout.layouts[1])
 		generate_wibar(s)
@@ -201,6 +201,9 @@ client.connect_signal("manage", function(c)
 		c.shape = gears.shape.rounded_rect
 	end
 )
+
+awful.spawn("xset r rate 220 40")
+awful.spawn("picom --blur-method dual_kawase --blur-strength 7")
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color= beautiful.border_normal end)

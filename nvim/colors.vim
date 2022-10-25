@@ -76,12 +76,13 @@ require("onedarkpro").setup({
     underline = true, -- Use underline styles?
     undercurl = true, -- Use undercurl styles?
     cursorline = true, -- Use cursorline highlighting?
-    transparency = false, -- Use a transparent background?
+    transparency = true, -- Use a transparent background?
     terminal_colors = false, -- Use the theme's colors for Neovim's :terminal?
     window_unfocused_color = false, -- When the window is out of focus, change the normal background?
   }
 })
 EOF
 
-colorscheme onedarkpro
+let g:enfocado_style = 'nature' " Available: `nature` or `neon`.
 
+colorscheme onedarkpro
