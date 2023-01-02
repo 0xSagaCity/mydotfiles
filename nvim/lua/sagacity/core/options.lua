@@ -3,15 +3,18 @@ local opt = vim.opt
 opt.cursorline = true
 opt.incsearch = true
 opt.ruler = true
+
 opt.tabstop = 2
 opt.shiftwidth = 2
+opt.smarttab = true
+opt.softtabstop = 0
+opt.expandtab = false
+
 opt.ai = true
 opt.si = true
 opt.smartcase = true
-opt.smarttab = true
 opt.ignorecase = true
 opt.title = true
-opt.expandtab = true
 opt.autoindent = true
 opt.hlsearch = true
 opt.smartindent = true

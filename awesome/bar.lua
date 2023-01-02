@@ -12,7 +12,7 @@ local brightness_widget = require("widgets.brightness")
 local cal_task = require("widgets.cal_task")
 
 local menu_bg = function(cr, w, h)
-	gears.shape.rounded_rect(cr, w, h, 8)
+	gears.shape.rounded_rect(cr, w, h, 16)
 end
 -- [[[ Main Menu
 local mymainmenu = awful.menu({
@@ -37,7 +37,7 @@ mymainmenu.wibox.shape = menu_bg
 
 local menulauncher = wibox.widget.imagebox(beautiful.menu_launcher)
 menulauncher:connect_signal("button::press", function(_, _, _, button)
-	mymainmenu:show({ coords = { x = 20, y = 870 } })
+	mymainmenu:show({ coords = { x = 10, y = 30 } })
 end)
 
 -- Hide the menu when the mouse leaves it
@@ -69,7 +69,7 @@ end)
 -- [[[ Middle Box
 local on_middlebar_mouse_button = function(_, _, _, button)
 	if button == 3 then
-		awful.spawn("rofi -modi window -show window -theme horizon", false)
+		awful.spawn("/home/sagacity/.config/rofi/launchers/type-1/openLauncher.sh", false)
 	elseif button == 4 then
 		if mouse.screen ~= awful.screen.focused({ client = true, mouse = false }) then
 			awful.screen.focus(mouse.screen)
@@ -207,12 +207,18 @@ local my_brightness_widget =
 
 function GenerateWibar(s)
 	-- layout indicator
-	-- s.mylayoutbox = awful.widget.layoutbox(s)
-	-- s.mylayoutbox:buttons(gears.table.join(
-	-- 	awful.button({}, 1, function() awful.layout.inc(1) end),
-	-- 	awful.button({}, 2, function() awful.layout.set(awful.layout.layouts[1]) end),
-	-- 	awful.button({}, 3, function() awful.layout.inc(-1) end)
-	-- ))
+	s.mylayoutbox = awful.widget.layoutbox(s)
+	s.mylayoutbox:buttons(gears.table.join(
+		awful.button({}, 1, function()
+			awful.layout.inc(1)
+		end),
+		awful.button({}, 2, function()
+			awful.layout.set(awful.layout.layouts[1])
+		end),
+		awful.button({}, 3, function()
+			awful.layout.inc(-1)
+		end)
+	))
 
 	s.mytaglist = awful.widget.taglist({
 		screen = s,
@@ -225,7 +231,7 @@ function GenerateWibar(s)
 		filter = awful.widget.tasklist.filter.minimizedcurrenttags,
 		buttons = tasklist_buttons,
 		layout = {
-			spacing = 2,
+			spacing = 4,
 			layout = wibox.layout.fixed.horizontal,
 		},
 		widget_template = {
@@ -237,7 +243,7 @@ function GenerateWibar(s)
 			widget = wibox.container.background,
 			bg = "#1f2335",
 			shape = gears.shape.circle,
-			shape_border_width = 5,
+			shape_border_width = 1,
 			shape_border_color = "#000000",
 		},
 	})
@@ -247,17 +253,28 @@ function GenerateWibar(s)
 	my_middle_widget:connect_signal("button::press", on_middlebar_mouse_button)
 
 	s.mywibar = awful.wibar({
+		shape = function(cr, w, h)
+			gears.shape.rounded_rect(cr, w, h, 4)
+		end,
+		stretch = false,
 		position = "top",
 		screen = s,
+		x = 0,
+		y = 0,
 		bg = beautiful.bg_wibar,
 		fg = beautiful.fg_normal,
-		width = 1920,
+		width = 1900,
 		height = 22,
+		border_width = 1,
+		border_color = "#3c3836",
 	})
+
+	s.mywibar.y = 4
 
 	s.mywibar:setup({
 		layout = wibox.layout.align.horizontal,
 		{ -- Left widgets
+			spacing = beautiful.widget_gap,
 			layout = wibox.layout.fixed.horizontal,
 			menulauncher,
 			s.mytaglist,
@@ -268,11 +285,6 @@ function GenerateWibar(s)
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
 			spacing = beautiful.widget_gap,
-			spacing_widget = {
-				widget = wibox.widget.separator,
-				span_ratio = 0.7,
-				color = beautiful.fg_normal,
-			},
 			my_volume_widget,
 			s.index == 1 and memory_widget or nil,
 			s.index == 1 and cpu_widget or nil,

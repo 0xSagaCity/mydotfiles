@@ -89,10 +89,10 @@ _G.packer_plugins = {
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/ReplaceWithRegister",
     url = "https://github.com/vim-scripts/ReplaceWithRegister"
   },
-  chadtree = {
+  catppuccin = {
     loaded = true,
-    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/chadtree",
-    url = "https://github.com/ms-jpq/chadtree"
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/catppuccin",
+    url = "https://github.com/catppuccin/nvim"
   },
   ["cmp-buffer"] = {
     loaded = true,
@@ -114,6 +114,11 @@ _G.packer_plugins = {
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["dressing.nvim"] = {
+    loaded = true,
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/dressing.nvim",
+    url = "https://github.com/stevearc/dressing.nvim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -124,10 +129,15 @@ _G.packer_plugins = {
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
-  gruvbox = {
+  ["gruvbox-baby"] = {
     loaded = true,
-    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/gruvbox",
-    url = "https://github.com/morhetz/gruvbox"
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/gruvbox-baby",
+    url = "https://github.com/luisiacc/gruvbox-baby"
+  },
+  gruvqueen = {
+    loaded = true,
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/gruvqueen",
+    url = "https://github.com/Murtaza-Udaipurwala/gruvqueen"
   },
   ["indent-blankline.nvim"] = {
     loaded = true,
@@ -164,6 +174,16 @@ _G.packer_plugins = {
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["neo-tree.nvim"] = {
+    loaded = true,
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/neo-tree.nvim",
+    url = "https://github.com/nvim-neo-tree/neo-tree.nvim"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
+  },
   ["null-ls.nvim"] = {
     loaded = true,
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
@@ -179,10 +199,25 @@ _G.packer_plugins = {
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
+  ["nvim-colorizer.lua"] = {
+    loaded = true,
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
+    url = "https://github.com/norcalli/nvim-colorizer.lua"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-material-icon"] = {
+    loaded = true,
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/nvim-material-icon",
+    url = "https://github.com/DaikyXendo/nvim-material-icon"
+  },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/DaikyXendo/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -205,6 +240,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/onedarkpro.nvim",
     url = "https://github.com/olimorris/onedarkpro.nvim"
+  },
+  ["oxocarbon.nvim"] = {
+    loaded = true,
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/oxocarbon.nvim",
+    url = "https://github.com/nyoom-engineering/oxocarbon.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -230,6 +270,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/typescript.nvim",
     url = "https://github.com/jose-elias-alvarez/typescript.nvim"
+  },
+  ["vim-be-good"] = {
+    loaded = true,
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/vim-be-good",
+    url = "https://github.com/ThePrimeagen/vim-be-good"
   },
   ["vim-maximizer"] = {
     loaded = true,

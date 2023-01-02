@@ -33,12 +33,19 @@ return packer.startup(function(use)
 
 	use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
-	use("morhetz/gruvbox")
+	use("Murtaza-Udaipurwala/gruvqueen")
+	use("luisiacc/gruvbox-baby")
 	use("olimorris/onedarkpro.nvim") -- preferred colorscheme
+	use({
+		"catppuccin/nvim",
+		as = "catppuccin",
+		compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
+	})
+	use({ "nyoom-engineering/oxocarbon.nvim" })
 
 	use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
-
 	use("szw/vim-maximizer") -- maximizes and restores current window
+	use("ThePrimeagen/vim-be-good") -- Neovim game
 
 	-- essential plugins
 	use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
@@ -48,7 +55,22 @@ return packer.startup(function(use)
 	use("numToStr/Comment.nvim")
 
 	-- file explorer
-	use({ "ms-jpq/chadtree", branch = "chad", run = "python3 -m chadtree deps" })
+	use({
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+		},
+	})
+
+	use({
+		"DaikyXendo/nvim-tree.lua",
+		requires = {
+			"DaikyXendo/nvim-material-icon", -- optional, for file icons
+		},
+	})
 
 	-- vs-code like icons
 	use("kyazdani42/nvim-web-devicons")
@@ -105,6 +127,13 @@ return packer.startup(function(use)
 
 	--which key pressed
 	use("folke/which-key.nvim")
+	-- better ui???
+	use({ "stevearc/dressing.nvim" })
+	--colorizer
+	use("norcalli/nvim-colorizer.lua")
+
+	--custom plugin
+	-- use("/home/sagacity/Code/Learning/bhosadi.nvim/")
 
 	if packer_bootstrap then
 		require("packer").sync()

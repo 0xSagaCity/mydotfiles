@@ -14,7 +14,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 
 naughty.config.defaults = {
-	timeout = 5,
+	timeout = 1,
 	text = "",
 	screen = 1,
 	ontop = true,
@@ -86,8 +86,8 @@ end)
 
 local generate_wibar = require("bar")
 awful.screen.connect_for_each_screen(function(s)
-	-- gears.wallpaper.maximized(beautiful.wallpapers[s.index], s, true)
-	gears.wallpaper.centered(beautiful.wallpapers[s.index], s, "#0D1015", 0.5)
+	gears.wallpaper.maximized(beautiful.wallpapers[s.index], s, true)
+	-- gears.wallpaper.centered(beautiful.wallpapers[s.index], s, "#08090B", 1.07)
 	-- Tags
 	awful.tag(tagnames, s, awful.layout.layouts[1])
 	generate_wibar(s)
@@ -135,14 +135,14 @@ awful.rules.rules = {
 	{
 		rule_any = {
 			instance = {
-				-- "pinentry",
+				"pinentry",
 				"nmtui", -- set when launched from wifi widget
 			},
 			class = {
 				"Pavucontrol",
-				-- "Blueman-manager",
+				"Blueman-manager",
 				"Qalculate-gtk",
-				-- "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
+				"Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
 			},
 			-- Note that the name property shown in xprop might be set slightly after creation of the client
 			-- and the name shown there might not match defined rules here.
@@ -194,7 +194,7 @@ client.connect_signal("manage", function(c)
 end)
 
 awful.spawn("xset r rate 220 40")
-awful.spawn("picom --blur-method dual_kawase --blur-strength 7")
+awful.spawn("picom")
 
 client.connect_signal("focus", function(c)
 	c.border_color = beautiful.border_focus

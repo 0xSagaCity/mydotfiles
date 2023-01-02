@@ -1,11 +1,8 @@
-vim.g.mapleader = ","
+vim.g.mapleader = " "
 
 local keymap = vim.keymap
 
-keymap.set("n", "<leader>nh", ":nohl<CR>")
-
--- make spacebar as :
-keymap.set("n", " ", ":") -- decrement
+keymap.set("n", "<leader>nh", ":nohl<CR>") --remove highlights
 
 -- window management
 keymap.set("n", "<leader>sv", "<C-w>v") -- split window vertically
@@ -29,14 +26,16 @@ keymap.set("n", "<leader>rr", ":source ~/.config/nvim/init.lua")
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window maximization
 
 -- nvim-tree
-keymap.set("n", "|", ":CHADopen<CR>") -- toggle file explorer
+keymap.set("n", "|", ":NvimTreeToggle<CR>") -- toggle file explorer
 
 -- telescope
-keymap.set("n", "<leader>f", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
-keymap.set("n", "<leader>g", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
-keymap.set("n", "<leader>s", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
-keymap.set("n", "<leader>b", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
+keymap.set("n", "<leader>pf", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
+keymap.set("n", "<leader>pg", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
+keymap.set("n", "<leader>ps", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
+keymap.set("n", "<leader>pb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
 keymap.set("n", "<leader>h", "<cmd>Telescope help_tags<cr>") -- list available help tags
+keymap.set("n", "<leader>cc", "<cmd>Telescope colorscheme<cr>") -- list available help tags
+keymap.set("n", "<leader>pd", "<cmd>Telescope diagnostics<cr>") -- list available diagnostics
 
 -- telescope git commands
 keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>") -- list all git commits (use <cr> to checkout) ["gc" for git commits]
