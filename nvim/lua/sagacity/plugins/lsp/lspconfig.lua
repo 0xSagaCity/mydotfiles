@@ -60,20 +60,20 @@ local on_attach = function(client, bufnr)
 	}
 
 	-- diagnostics
-	keymap.set("n", "[d", "<cmd>lua vim.diagnostic.get_prev()<CR>", opts) -- jump to previous diagnostic in buffer
-	keymap.set("n", "]d", "<cmd>lua vim.diagnostic.get_next()<CR>", opts) -- jump to next diagnostic in buffer
-	keymap.set("n", "<leader>d", "<cmd>lua vim.diagnostic.get()<CR>", opts) -- show diagnostics for cursor
+	-- keymap.set("n", "[d", "<cmd>lua vim.diagnostic.get_prev()<CR>", opts) -- jump to previous diagnostic in buffer
+	-- keymap.set("n", "]d", "<cmd>lua vim.diagnostic.get_next()<CR>", opts) -- jump to next diagnostic in buffer
+	-- keymap.set("n", "<leader>d", "<cmd>lua vim.diagnostic.get()<CR>", opts) -- show diagnostics for cursor
 
 	-- specific (definitions and declarations etc)
-	keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts) -- see definition and make edits in window
-	keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts) -- got to declaration
-	keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts) -- smart rename
+	-- keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts) -- see definition and make edits in window
+	-- keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts) -- got to declaration
+	-- keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts) -- smart rename
 
 	-- most used
-	keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
-	keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.references()<CR>", opts) -- show definition, references
-	keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts) -- go to implementation
-	keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts) -- see available code actions
+	-- keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
+	-- keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.references()<CR>", opts) -- show definition, references
+	-- keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts) -- go to implementation
+	-- keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts) -- see available code actions
 
 	-- typescript specific keymaps (e.g. rename file and update imports)
 	if client.name == "tsserver" then
@@ -135,7 +135,7 @@ lspconfig["tailwindcss"].setup({
 })
 
 -- configure lua server (with special settings)
-lspconfig["sumneko_lua"].setup({
+lspconfig["lua_ls"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 	settings = { -- custom settings for lua

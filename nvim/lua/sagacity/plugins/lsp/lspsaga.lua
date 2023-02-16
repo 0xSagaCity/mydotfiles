@@ -4,105 +4,38 @@ if not saga_status then
 	return
 end
 
-saga.init_lsp_saga({
-	-- keybinds for navigation in lspsaga window
-	move_in_saga = { prev = "<C-k>", next = "<C-j>" },
-	-- use enter to open file with finder
-	finder_action_keys = {
-		open = "<CR>",
+saga.setup({
+	ui = {
+		-- currently only round theme
+		theme = "round",
+		-- this option only work in neovim 0.9
+		title = true,
+		-- border type can be single,double,rounded,solid,shadow.
+		border = "rounded",
+		winblend = 0,
+		expand = "",
+		collapse = "",
+		preview = " ",
+		code_action = "🖉",
+		diagnostic = "🐛",
+		incoming = " ",
+		outgoing = " ",
+		colors = {
+			--float window normal background color
+			normal_bg = "#282828",
+			--title background color
+			title_bg = "#b8bb26",
+			red = "#cc241d",
+			magenta = "#b16286",
+			orange = "#fabd2f",
+			yellow = "#fabd2f",
+			green = "#b8bb26",
+			cyan = "#458588",
+			blue = "#076678",
+			purple = "#8f3f71",
+			white = "#ebdbb2",
+			black = "#1d2021",
+		},
+		kind = {},
 	},
-	-- use enter to open file with definition preview
-	definition_action_keys = {
-		edit = "<CR>",
-		quit = "q",
-	},
-	code_action_keys = {
-		quit = "q",
-		exec = "<CR>",
-	},
-	border_style = "rounded",
-
-	-- Options with default value
-	--the range of 0 for fully opaque window (disabled) to 100 for fully
-	--transparent background. Values between 0-30 are typically most useful.
-	saga_winblend = 0,
-	-- when cursor in saga window you config these to move
-	-- Error, Warn, Info, Hint
-	-- use emoji like
-	-- { "🙀", "😿", "😾", "😺" }
-	-- or
-	-- { "", "", "", "" }
-	-- and diagnostic_header can be a function type
-	-- must return a string and when diagnostic_header
-	-- is function type it will have a param `entry`
-	-- entry is a table type has these filed
-	-- { bufnr, code, col, end_col, end_lnum, lnum, message, severity, source }
-	diagnostic_header = { " ", " ", " ", "⭌ " },
-	-- preview lines of lsp_finder and definition preview
-	max_preview_lines = 12,
-	-- use emoji lightbulb in default
-	code_action_icon = "🏶",
-	-- if true can press number to execute the codeaction in codeaction window
-	code_action_num_shortcut = true,
-	-- same as nvim-lightbulb but async
-	code_action_lightbulb = {
-		enable = true,
-		enable_in_insert = true,
-		cache_code_action = true,
-		sign = true,
-		update_time = 150,
-		sign_priority = 20,
-		virtual_text = true,
-	},
-	-- finder icons
-	finder_icons = {
-		def = "  ",
-		ref = "諭 ",
-		link = "  ",
-	},
-	-- finder do lsp request timeout
-	-- if your project big enough or your server very slow
-	-- you may need to increase this value
-	finder_request_timeout = 1500,
-	rename_action_quit = "<C-c>",
-	rename_in_select = true,
-	-- show symbols in winbar must nightly
-	-- in_custom mean use lspsaga api to get symbols
-	-- and set it to your custom winbar or some winbar plugins.
-	-- if in_cusomt = true you must set in_enable to false
-	symbol_in_winbar = {
-		in_custom = false,
-		enable = true,
-		separator = " ➤ ",
-		show_file = true,
-		-- define how to customize filename, eg: %:., %
-		-- if not set, use default value `%:t`
-		-- more information see `vim.fn.expand` or `expand`
-		-- ## only valid after set `show_file = true`
-		file_formatter = "",
-		click_support = false,
-	},
-	-- show outline
-	show_outline = {
-		win_position = "right",
-		--set special filetype win that outline window split.like NvimTree neotree
-		-- defx, db_ui
-		win_with = "",
-		win_width = 30,
-		auto_enter = true,
-		auto_preview = true,
-		virt_text = "┃",
-		jump_key = "o",
-		-- auto refresh when change buffer
-		auto_refresh = true,
-	},
-	-- custom lsp kind
-	-- usage { Field = 'color code'} or {Field = {your icon, your color code}}
-	custom_kind = {
-		Field = "#000000",
-	},
-	-- if you don't use nvim-lspconfig you must pass your server name and
-	-- the related filetypes into this table
-	-- like server_filetype_map = { metals = { "sbt", "scala" } }
-	server_filetype_map = {},
 })

@@ -4,7 +4,7 @@ opt.cursorline = true
 opt.incsearch = true
 opt.ruler = true
 
-opt.tabstop = 2
+opt.tabstop = 4
 opt.shiftwidth = 2
 opt.smarttab = true
 opt.softtabstop = 0

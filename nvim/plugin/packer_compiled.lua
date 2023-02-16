@@ -119,6 +119,11 @@ _G.packer_plugins = {
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/dressing.nvim",
     url = "https://github.com/stevearc/dressing.nvim"
   },
+  everforest = {
+    loaded = true,
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/everforest",
+    url = "https://github.com/sainnhe/everforest"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -129,15 +134,10 @@ _G.packer_plugins = {
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
-  ["gruvbox-baby"] = {
+  ["gruvbox-material"] = {
     loaded = true,
-    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/gruvbox-baby",
-    url = "https://github.com/luisiacc/gruvbox-baby"
-  },
-  gruvqueen = {
-    loaded = true,
-    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/gruvqueen",
-    url = "https://github.com/Murtaza-Udaipurwala/gruvqueen"
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/gruvbox-material",
+    url = "https://github.com/sainnhe/gruvbox-material"
   },
   ["indent-blankline.nvim"] = {
     loaded = true,
@@ -236,16 +236,6 @@ _G.packer_plugins = {
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
-  ["onedarkpro.nvim"] = {
-    loaded = true,
-    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/onedarkpro.nvim",
-    url = "https://github.com/olimorris/onedarkpro.nvim"
-  },
-  ["oxocarbon.nvim"] = {
-    loaded = true,
-    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/oxocarbon.nvim",
-    url = "https://github.com/nyoom-engineering/oxocarbon.nvim"
-  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -255,6 +245,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  sonokai = {
+    loaded = true,
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/sonokai",
+    url = "https://github.com/sainnhe/sonokai"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
@@ -275,6 +270,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/vim-be-good",
     url = "https://github.com/ThePrimeagen/vim-be-good"
+  },
+  ["vim-instant-markdown"] = {
+    loaded = true,
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/vim-instant-markdown",
+    url = "https://github.com/instant-markdown/vim-instant-markdown"
   },
   ["vim-maximizer"] = {
     loaded = true,

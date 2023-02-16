@@ -33,19 +33,20 @@ return packer.startup(function(use)
 
 	use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
-	use("Murtaza-Udaipurwala/gruvqueen")
-	use("luisiacc/gruvbox-baby")
-	use("olimorris/onedarkpro.nvim") -- preferred colorscheme
 	use({
 		"catppuccin/nvim",
 		as = "catppuccin",
 		compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 	})
-	use({ "nyoom-engineering/oxocarbon.nvim" })
+	use({ "sainnhe/everforest" })
+	use({ "sainnhe/sonokai" })
+	use({ "sainnhe/gruvbox-material" })
 
 	use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
 	use("szw/vim-maximizer") -- maximizes and restores current window
 	use("ThePrimeagen/vim-be-good") -- Neovim game
+
+	use("instant-markdown/vim-instant-markdown")
 
 	-- essential plugins
 	use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)

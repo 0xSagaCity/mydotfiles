@@ -13,7 +13,7 @@ if not lspkind_status then
 	return
 end
 
-vim.cmd("highlight! FloatBorder guibg=NONE guifg=#504945")
+vim.cmd("highlight! FloatBorder guibg=NONE guifg=#393230")
 
 local border_opts = {
 	border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },

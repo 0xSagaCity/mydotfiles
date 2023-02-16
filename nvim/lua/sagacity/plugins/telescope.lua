@@ -60,7 +60,7 @@ local options = {
 
 telescope.setup(options)
 
-vim.cmd("highlight! TelescopeBorder guibg=NONE guifg=#504945")
+vim.cmd("highlight! TelescopeBorder guibg=NONE guifg=#393230")
 
 -- load extensions
 pcall(function()
