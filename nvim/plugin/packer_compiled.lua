@@ -271,6 +271,11 @@ _G.packer_plugins = {
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/vim-be-good",
     url = "https://github.com/ThePrimeagen/vim-be-good"
   },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
+  },
   ["vim-instant-markdown"] = {
     loaded = true,
     path = "/home/sagacity/.local/share/nvim/site/pack/packer/start/vim-instant-markdown",

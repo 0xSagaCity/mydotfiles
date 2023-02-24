@@ -87,7 +87,7 @@ end)
 local generate_wibar = require("bar")
 awful.screen.connect_for_each_screen(function(s)
 	gears.wallpaper.maximized(beautiful.wallpapers[s.index], s, true)
-	-- gears.wallpaper.centered(beautiful.wallpapers[s.index], s, "#08090B", 1.07)
+	-- gears.wallpaper.centered(beautiful.wallpapers[s.index], s, "#08090B", 1)
 	-- Tags
 	awful.tag(tagnames, s, awful.layout.layouts[1])
 	generate_wibar(s)

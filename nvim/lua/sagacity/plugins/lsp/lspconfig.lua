@@ -134,6 +134,13 @@ lspconfig["tailwindcss"].setup({
 	on_attach = on_attach,
 })
 
+lspconfig["svelte"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	filetypes = { "svelte" },
+	root_pattern = { "package.json", ".git" },
+})
+
 -- configure lua server (with special settings)
 lspconfig["lua_ls"].setup({
 	capabilities = capabilities,

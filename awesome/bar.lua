@@ -12,7 +12,7 @@ local brightness_widget = require("widgets.brightness")
 local cal_task = require("widgets.cal_task")
 
 local menu_bg = function(cr, w, h)
-	gears.shape.rounded_rect(cr, w, h, 16)
+	gears.shape.rounded_rect(cr, w, h, 0)
 end
 -- [[[ Main Menu
 local mymainmenu = awful.menu({
@@ -124,7 +124,7 @@ local tasklist_buttons = gears.table.join(
 
 -- Textclock
 local mytextclock =
-	wibox.widget.textclock(markup("#ff9e64", "%a %d %b") .. markup("#cc241d", "::") .. markup("#83a598", "%I:%M %p"))
+	wibox.widget.textclock(markup("#f9e2af", "%a %d %b") .. markup("#f38ba8", "::") .. markup("#a6e3a1", "%I:%M %p"))
 -- mytextclock.font = beautiful.font
 local clock_widget = wibox.widget({
 	widget = wibox.layout.fixed.horizontal,
@@ -149,7 +149,7 @@ local cpu_widget = {
 	wibox.widget.imagebox(beautiful.widget_cpu),
 	lain_widget.cpu({
 		settings = function()
-			widget:set_markup(markup.fontfg(beautiful.font, "#b8bb26", cpu_now.usage .. "%"))
+			widget:set_markup(markup.fontfg(beautiful.font, "#f38ba8", cpu_now.usage .. "%"))
 		end,
 	}).widget,
 }
@@ -167,7 +167,7 @@ local battery_widget = {
 				perc = perc .. " A/C"
 			end
 
-			widget:set_markup(markup.fontfg(beautiful.font, "#d3869b", perc))
+			widget:set_markup(markup.fontfg(beautiful.font, "#f38ba8", perc))
 		end,
 	}),
 }
@@ -179,7 +179,7 @@ local memory_widget = {
 	wibox.widget.imagebox(beautiful.widget_mem),
 	lain_widget.mem({
 		settings = function()
-			widget:set_markup(markup.fontfg(beautiful.font, "#fabd2f", mem_now.used .. "M"))
+			widget:set_markup(markup.fontfg(beautiful.font, "#f9e2af", mem_now.used .. "M"))
 		end,
 	}).widget,
 }
@@ -241,10 +241,10 @@ function GenerateWibar(s)
 				image = beautiful.minimise_def_icon, -- default icon for apps without icon
 			},
 			widget = wibox.container.background,
-			bg = "#1f2335",
+			bg = "#89b4fa",
 			shape = gears.shape.circle,
 			shape_border_width = 1,
-			shape_border_color = "#000000",
+			shape_border_color = "#454754",
 		},
 	})
 
@@ -254,7 +254,7 @@ function GenerateWibar(s)
 
 	s.mywibar = awful.wibar({
 		shape = function(cr, w, h)
-			gears.shape.rounded_rect(cr, w, h, 4)
+			gears.shape.rounded_rect(cr, w, h, 0)
 		end,
 		stretch = false,
 		position = "top",
@@ -263,13 +263,12 @@ function GenerateWibar(s)
 		y = 0,
 		bg = beautiful.bg_wibar,
 		fg = beautiful.fg_normal,
-		width = 1900,
-		height = 22,
-		border_width = 1,
-		border_color = "#3c3836",
+		width = 1920,
+		height = 20,
+		border_width = 0,
 	})
 
-	s.mywibar.y = 4
+	s.mywibar.y = 0
 
 	s.mywibar:setup({
 		layout = wibox.layout.align.horizontal,

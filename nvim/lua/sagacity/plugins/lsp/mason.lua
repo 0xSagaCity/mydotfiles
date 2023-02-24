@@ -27,6 +27,7 @@ mason_lspconfig.setup({
 		"cssls",
 		"rust_analyzer",
 		"lua_ls",
+		"svelte",
 	},
 	-- auto-install configured servers (with lspconfig)
 	automatic_installation = true, -- not the same as ensure_installed

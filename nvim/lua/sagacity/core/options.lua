@@ -4,11 +4,11 @@ opt.cursorline = true
 opt.incsearch = true
 opt.ruler = true
 
-opt.tabstop = 4
-opt.shiftwidth = 2
-opt.smarttab = true
-opt.softtabstop = 0
-opt.expandtab = false
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
 
 opt.ai = true
 opt.si = true
@@ -17,7 +17,6 @@ opt.ignorecase = true
 opt.title = true
 opt.autoindent = true
 opt.hlsearch = true
-opt.smartindent = true
 opt.autoread = true
 opt.hidden = true
 opt.wrap = false

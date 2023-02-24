@@ -50,6 +50,7 @@ vim.g.gruvbox_material_diagnostic_line_highlight = 1
 vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
 vim.g.gruvbox_material_current_word = "bold"
 vim.g.gruvbox_material_transparent_background = 2
+vim.g.gruvbox_material_foreground = "orignal"
 
 --everforest
 vim.g.everforest_background = "hard"
