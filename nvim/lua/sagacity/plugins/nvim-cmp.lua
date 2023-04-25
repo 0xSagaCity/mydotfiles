@@ -53,6 +53,7 @@ local cmp_config = {
 		select = true,
 	},
 	window = {
+		boreder = "rounded",
 		completion = cmp.config.window.bordered(border_opts),
 		documentation = cmp.config.window.bordered(border_opts),
 	},

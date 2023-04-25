@@ -1,74 +1,72 @@
--- catppuccin colorscheme
-require("catppuccin").setup({
-	flavour = "mocha", -- latte, frappe, macchiato, mocha
-	compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
-	transparent_background = true,
-	term_colors = false,
-	dim_inactive = {
-		enabled = false,
-		shade = "dark",
-		percentage = 0.15,
-	},
-	styles = {
-		comments = { "italic" },
-		functions = { "bold" },
-		strings = { "bold" },
-		numbers = { "bold" },
-		booleans = { "bold" },
-		types = { "bold" },
-		operators = { "bold" },
-	},
-	color_overrides = {
-		mocha = {
-			base = "#14141E",
-		},
-	},
-	custom_highlights = {},
-	integrations = {
-		cmp = true,
-		gitsigns = true,
-		mason = true,
-		telescope = true,
-		treesitter = true,
-		lsp_saga = true,
-		harpoon = true,
-		treesitter_context = true,
-		which_key = true,
-		-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
-	},
-})
-
 -- gruvbox colorscheme
 vim.g.background_color = "dark"
 vim.g.gruvbox_material_background = "hard"
 vim.g.gruvbox_material_enable_bold = 1
-vim.g.gruvbox_material_enable_italic = 1
+vim.g.gruvbox_material_enable_italic = 0
 vim.g.gruvbox_material_visual = "red background"
 vim.g.gruvbox_material_menu_selection_background = "orange"
 vim.g.gruvbox_material_diagnostic_text_highlight = 1
 vim.g.gruvbox_material_diagnostic_line_highlight = 1
 vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
 vim.g.gruvbox_material_current_word = "bold"
-vim.g.gruvbox_material_transparent_background = 2
-vim.g.gruvbox_material_foreground = "orignal"
+vim.g.gruvbox_material_transparent_background = 1
+vim.g.gruvbox_material_foreground = "mix"
+vim.g.gruvbox_material_ui_contrast = "low"
+vim.g.gruvbox_material_spell_foreground = "colored"
+vim.g.gruvbox_material_show_eob = 0
 
---everforest
-vim.g.everforest_background = "hard"
-vim.g.everforest_enable_italic = 1
-vim.g.everforest_diagnostic_text_highlight = 1
-vim.g.everforest_current_word = "bold"
-vim.g.everforest_transparent_background = 1
--- vim.g.everforest_colors_override = { 'bg0' = ['#202020', '234'] }
+-- gruvbox-baby
+-- Example config in Lua
+vim.g.gruvbox_baby_function_style = "bold"
+vim.g.gruvbox_baby_keyword_style = "bold"
+-- Each highlight group must follow the structure:
+-- ColorGroup = {fg = "foreground color", bg = "background_color", style = "some_style(:h attr-list)"}
+-- See also :h highlight-guifg
+-- Example:
+-- vim.g.gruvbox_baby_highlights = { Normal = { fg = "#123123", bg = "NONE", style = "underline" } }
+-- Enable telescope theme
+vim.g.gruvbox_baby_telescope_theme = 0
+-- Enable transparent mode
+vim.g.gruvbox_baby_transparent_mode = 1
+-- Load the colorscheme
+-- vim.g.background_color = "dark"
+vim.g.gruvbox_baby_string_style = "italic"
+vim.g.gruvbox_baby_variable_style = "bold"
+vim.g.use_original_palette = false
 
---sonokai
-vim.g.sonokai_style = "espresso"
-vim.g.sonokai_enable_italic = 1
-vim.g.sonokai_transparent_background = 2
-vim.g.sonokai_diagnostic_text_highlight = 1
-vim.g.sonokai_diagnostic_line_highlight = 1
-vim.g.sonokai_current_word = "bold"
-vim.g.sonokai_better_performance = 1
-vim.g.sonokai_menu_selection_background = "blue"
+require("monokai-pro").setup({
+	transparent_background = false,
+	terminal_colors = true,
+	devicons = true, -- highlight the icons of `nvim-web-devicons`
+	italic_comments = true,
+	filter = "ristretto", -- classic | octagon | pro | machine | ristretto | spectrum
+	-- Enable this will disable filter option
+	day_night = {
+		enable = false, -- turn off by default
+		day_filter = "pro", -- classic | octagon | pro | machine | ristretto | spectrum
+		night_filter = "spectrum", -- classic | octagon | pro | machine | ristretto | spectrum
+	},
+	inc_search = "background", -- underline | background
+	background_clear = {
+		-- "float_win",
+		"toggleterm",
+		-- "telescope",
+		--"which-key",
+		"renamer",
+	}, -- "float_win", "toggleterm", "telescope", "which-key", "renamer", "neo-tree"
+	plugins = {
+		bufferline = {
+			underline_selected = true,
+			underline_visible = false,
+		},
+		indent_blankline = {
+			context_highlight = "pro", -- default | pro
+			context_start_underline = false,
+		},
+	},
+	--- @param c Colorscheme
+	override = function(c) end,
+})
 
 local status, _ = pcall(vim.cmd, "colorscheme gruvbox-material")
 if not status then

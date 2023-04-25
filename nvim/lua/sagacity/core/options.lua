@@ -1,6 +1,7 @@
 local opt = vim.opt
 
 opt.cursorline = true
+opt.cursorlineopt = "number"
 opt.incsearch = true
 opt.ruler = true
 
@@ -44,3 +45,11 @@ opt.formatoptions = "r"
 -- Indent blankline
 opt.list = true
 opt.listchars:append("eol:↴")
+
+-- vim.cmd("highlight! WinSeparator guibg=NONE guifg=#393230")
+-- vim.cmd("highlight! NvimTreeWinSeparator guibg=NONE guifg=#393230")
+-- vim.cmd("highlight! GitSignsAdd guibg=NONE guifg=#90A959")
+-- vim.cmd("highlight! GitSignsChange guibg=NONE guifg=#D28445")
+-- vim.cmd("highlight! GitSignsDelete guibg=NONE guifg=#Ac4142")
+-- vim.cmd("highlight! CursorLineNr guibg=NONE guifg=#Ac4142")
+-- vim.api.nvim_set_hl(0, "Keyword", { bold = true })

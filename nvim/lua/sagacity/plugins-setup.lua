@@ -30,28 +30,27 @@ end
 return packer.startup(function(use)
 	-- packer can manage itself
 	use("wbthomason/packer.nvim")
-
 	use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
-	use({
-		"catppuccin/nvim",
-		as = "catppuccin",
-		compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
-	})
-	use({ "sainnhe/everforest" })
-	use({ "sainnhe/sonokai" })
+	--colors ;__;
+	use({ "RRethy/nvim-base16" }) -- Best right now base16-classic-dark
+	use({ "luisiacc/gruvbox-baby" }) -- Did you mean gruvbox-material?
+	use({ "loctvl842/monokai-pro.nvim" })
 	use({ "sainnhe/gruvbox-material" })
+	use({ "arturgoms/moonbow.nvim" })
 
 	use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
 	use("szw/vim-maximizer") -- maximizes and restores current window
 	use("ThePrimeagen/vim-be-good") -- Neovim game
 
 	use("instant-markdown/vim-instant-markdown")
+	use("ThePrimeagen/harpoon") -- Trying new things
 
 	-- essential plugins
 	use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
 	use("tpope/vim-fugitive") -- Git stuff
 	use("vim-scripts/ReplaceWithRegister") -- replace with register contents using motion (gr + motion)
+	use("godlygeek/tabular")
 
 	-- commenting with gc
 	use("numToStr/Comment.nvim")
@@ -79,6 +78,7 @@ return packer.startup(function(use)
 
 	-- statusline
 	use("nvim-lualine/lualine.nvim")
+	use("tamton-aquib/staline.nvim")
 
 	-- fuzzy finding w/ telescope
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
@@ -129,8 +129,7 @@ return packer.startup(function(use)
 
 	--which key pressed
 	use("folke/which-key.nvim")
-	-- better ui???
-	use({ "stevearc/dressing.nvim" })
+	use("folke/trouble.nvim")
 	--colorizer
 	use("norcalli/nvim-colorizer.lua")
 

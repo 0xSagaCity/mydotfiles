@@ -9,12 +9,12 @@ saga.setup({
 		-- currently only round theme
 		theme = "round",
 		-- this option only work in neovim 0.9
-		title = true,
+		title = false,
 		-- border type can be single,double,rounded,solid,shadow.
 		border = "rounded",
 		winblend = 0,
-		expand = "",
-		collapse = "",
+		expand = "  ",
+		collapse = "  ",
 		preview = " ",
 		code_action = "🖉",
 		diagnostic = "🐛",
@@ -37,5 +37,30 @@ saga.setup({
 			black = "#1d2021",
 		},
 		kind = {},
+		symbol_in_winbar = {
+			enable = false,
+			separator = "  ",
+			ignore_patterns = {},
+			hide_keyword = true,
+			show_file = true,
+			folder_level = 2,
+			respect_root = true,
+			color_mode = false,
+		},
+		outline = {
+			win_position = "left",
+			win_with = "",
+			win_width = 30,
+			show_detail = true,
+			auto_preview = true,
+			auto_refresh = true,
+			auto_close = true,
+			custom_sort = nil,
+			keys = {
+				jump = "o",
+				expand_collapse = "u",
+				quit = "q",
+			},
+		},
 	},
 })

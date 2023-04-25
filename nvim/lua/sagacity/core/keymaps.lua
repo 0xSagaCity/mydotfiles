@@ -76,13 +76,13 @@ keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
 keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 -- Diagnostic jump with filter like Only jump to error
 keymap.set("n", "[D", function()
-	q("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
+	require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
 end)
 keymap.set("n", "]D", function()
-	q("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
+	require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
 end)
 -- Toggle Outline
-keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
+keymap.set("n", "<leader>ou", "<cmd>Lspsaga outline<CR>")
 -- Hover Doc
 -- if there has no hover will have a notify no information available
 -- to disable it just Lspsaga hover_doc ++quiet
@@ -92,3 +92,26 @@ keymap.set("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
 keymap.set("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 -- Float terminal
 keymap.set({ "n", "t" }, "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
+
+--Trouble keymaps
+keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
+keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
+keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true, noremap = true })
+keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, noremap = true })
+keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true })
+keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
+keymap.set("n", "gD", "<cmd>TroubleToggle lsp_definitions<cr>", { silent = true, noremap = true })
+keymap.set("n", "gT", "<cmd>TroubleToggle lsp_type_definitions<cr>", { silent = true, noremap = true })
+
+--Harpoon keymaps
+keymap.set(
+	"n",
+	"<leader>l",
+	"<cmd>:lua require('harpoon.ui').toggle_quick_menu()<cr>",
+	{ silent = true, noremap = true }
+)
+keymap.set("n", "<leader>i", "<cmd>:lua require('harpoon.mark').add_file()<cr>")
+keymap.set("n", "<leader>1", "<cmd>:lua require('harpoon.ui').nav_file(1)<cr>")
+keymap.set("n", "<leader>2", "<cmd>:lua require('harpoon.ui').nav_file(2)<cr>")
+keymap.set("n", "<leader>3", "<cmd>:lua require('harpoon.ui').nav_file(3)<cr>")
+keymap.set("n", "<leader>4", "<cmd>:lua require('harpoon.ui').nav_file(4)<cr>")
